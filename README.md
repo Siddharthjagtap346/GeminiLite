@@ -92,7 +92,8 @@ GeminiLite/
 
 -Search output
 ![image](https://github.com/user-attachments/assets/de1572b9-5973-4602-b9d0-4334e0611f92)
- ---
+
+---
 
 
  ## License
