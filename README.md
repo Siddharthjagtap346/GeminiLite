@@ -21,9 +21,10 @@
 
 - Python 3.x
 - Flask web framework
-- scikit-learn (for TF-IDF vectorization)
+- scikit-learn (for **TF-IDF vectorization**)
 - Tailwind CSS for styling
-- JavaScript Web Speech API for voice input
+- JavaScript **Web Speech API** for voice input
+- **Jinja2** templating (Flask)
 
 ---
 
