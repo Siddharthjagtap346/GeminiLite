@@ -84,13 +84,13 @@ GeminiLite/
 
 ## Screenshots 
 
--UI
+- 🎨 UI
 ![image](https://github.com/user-attachments/assets/6a632f84-f7ee-40cb-94e1-24bb5ddfe27a)
 
--Voice search ui
+- 🎤 Voice search ui
 ![Screenshot 2025-06-04 201538](https://github.com/user-attachments/assets/3c64a571-f6dc-4355-b297-d42eb5ff675c)
 
--Search output
+- 🔍 Search output
 ![image](https://github.com/user-attachments/assets/de1572b9-5973-4602-b9d0-4334e0611f92)
 
 ---
