@@ -65,22 +65,21 @@ http://127.0.0.1:5000/
 ## API
 -GET /api/search?q=your_query
 
-Returns JSON array of search results with highlights and relevance scores.
----
 
-## Project Structure
+## 📁 Project Structure
+
+```
 GeminiLite/
-├── app.py
-├── vector_engine.py
+├── app.py                 # Main Flask backend
+├── vector_engine.py       # TF-IDF-based semantic search logic
 ├── data/
-│   └── corpus.txt
+│   └── corpus.txt         # Dataset of documents to search from
 ├── templates/
-│   └── index.html
-├── static/
-│   └── (CSS and JS files if any)
-├── requirements.txt
-└── README.md
----
+│   └── index.html         # Tailwind-powered frontend interface
+├── static/                # (Optional) JS, CSS, or assets folder
+├── requirements.txt       # Python dependencies
+└── README.md              # Project documentation
+```
 
 ## Screenshots 
 
