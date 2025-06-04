@@ -1,0 +1,5 @@
+Google is a search engine.
+OpenAI develops artificial intelligence models like ChatGPT.
+Python is a versatile programming language.
+Machine learning enables computers to learn from data.
+Natural language processing is a part of AI.

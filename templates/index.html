@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🧠 GeminiLite Semantic Search</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    mark {
+      background-color: #fde68a;
+      padding: 0 0.15em;
+      border-radius: 0.15rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col items-center p-6 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+  <div class="w-full max-w-3xl">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">🧠 GeminiLite Semantic Search</h1>
+      <button id="darkToggle" aria-label="Toggle Dark Mode"
+        class="bg-gray-300 dark:bg-gray-700 p-2 rounded-full transition hover:bg-gray-400 dark:hover:bg-gray-600">
+        🌙
+      </button>
+    </header>
+
+    <!-- Form -->
+    <form method="POST" class="flex gap-2 mb-4 items-center">
+      <button type="button" id="voiceBtn" class="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" aria-label="Voice Input">🎤</button>
+      <input
+        name="query"
+        type="search"
+        placeholder="Ask me anything..."
+        required
+        value="{{ query }}"
+        class="flex-1 px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+      >🔍 Search</button>
+    </form>
+
+    <!-- Tags -->
+    <div class="mb-4 flex flex-wrap gap-2">
+      {% set tags = ["AI", "NLP", "OpenAI", "Machine Learning", "ChatGPT"] %}
+      {% for tag in tags %}
+        <button
+          type="button"
+          class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm hover:bg-blue-200 transition dark:bg-blue-900 dark:text-blue-200"
+          onclick="setQuery('{{ tag }}')"
+        >{{ tag }}</button>
+      {% endfor %}
+    </div>
+
+    <!-- Suggested Questions -->
+    <div class="mb-6">
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Suggested:</p>
+      <ul class="space-y-1">
+        <li><button onclick="setQuery('What is NLP?')" class="hover:underline text-blue-600 dark:text-blue-300">🤖 What is NLP?</button></li>
+        <li><button onclick="setQuery('How does ChatGPT work?')" class="hover:underline text-blue-600 dark:text-blue-300">🧠 How does ChatGPT work?</button></li>
+        <li><button onclick="setQuery('Applications of AI')" class="hover:underline text-blue-600 dark:text-blue-300">⚙️ Applications of AI</button></li>
+      </ul>
+    </div>
+
+    <!-- Results -->
+    {% if results %}
+      <section class="space-y-6">
+        <h2 class="text-xl font-semibold mb-4">Results:</h2>
+        <ul class="space-y-4">
+          {% for doc, score, highlights, bar, color in results %}
+            <li class="p-4 bg-white rounded-lg shadow hover:shadow-md transition dark:bg-gray-800">
+              <p class="mb-2 text-lg">✅ {{ highlights|safe }}</p>
+              <p class="text-sm mt-1 {{ color }}">
+                Relevance: {{ "%.4f"|format(score) }} &nbsp; {{ bar }}
+              </p>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  </div>
+
+  <script>
+    const darkToggle = document.getElementById('darkToggle');
+    darkToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    const voiceBtn = document.getElementById('voiceBtn');
+    voiceBtn.addEventListener('click', () => {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert('Your browser does not support Speech Recognition');
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-US'; // You can change this or make dynamic with a language selector
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      voiceBtn.disabled = true;
+      voiceBtn.textContent = '🎙️ Listening...';
+
+      recognition.start();
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        const input = document.querySelector('input[name="query"]');
+        input.value = transcript;
+        voiceBtn.textContent = '🎤';
+        voiceBtn.disabled = false;
+        input.form.submit();
+      };
+
+      recognition.onerror = (event) => {
+        voiceBtn.textContent = '🎤';
+        voiceBtn.disabled = false;
+        alert('Error occurred in voice recognition: ' + event.error);
+      };
+
+      recognition.onend = () => {
+        voiceBtn.textContent = '🎤';
+        voiceBtn.disabled = false;
+      };
+    });
+
+    function setQuery(text) {
+      const input = document.querySelector('input[name="query"]');
+      input.value = text;
+      input.form.submit();
+    }
+  </script>
+</body>
+</html>

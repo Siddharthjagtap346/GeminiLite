@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GeminiLite API Docs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-6 font-sans">
+
+  <div class="max-w-3xl w-full bg-white rounded-lg shadow p-6">
+    <h1 class="text-3xl font-bold mb-4 text-center">🧠 GeminiLite API Documentation</h1>
+
+    <p class="mb-6 text-gray-700 text-center">
+      Use the API below to make semantic search queries. Example endpoint:
+      <code class="bg-gray-200 px-1 rounded">GET /api/search?q=your+query</code>
+    </p>
+
+    <div class="mb-4 flex gap-2">
+      <input id="queryInput" type="text" placeholder="Enter your query here..."
+             class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <button id="searchBtn"
+              class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+        Search
+      </button>
+    </div>
+
+    <h2 class="text-xl font-semibold mb-2">API Response:</h2>
+    <pre id="resultOutput" class="bg-gray-100 p-4 rounded-lg overflow-auto max-h-96 text-sm"></pre>
+
+  </div>
+
+  <script>
+    const searchBtn = document.getElementById('searchBtn');
+    const queryInput = document.getElementById('queryInput');
+    const resultOutput = document.getElementById('resultOutput');
+
+    searchBtn.addEventListener('click', () => {
+      const query = queryInput.value.trim();
+      if (!query) {
+        alert('Please enter a query');
+        return;
+      }
+      resultOutput.textContent = 'Loading...';
+      fetch(`/api/search?q=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+          resultOutput.textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+          resultOutput.textContent = 'Error: ' + err.message;
+        });
+    });
+
+    // Optional: allow Enter key to trigger search
+    queryInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        searchBtn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>
