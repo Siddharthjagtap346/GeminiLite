@@ -36,48 +36,39 @@
    cd GeminiLite
 Create a virtual environment (recommended)
 
-bash
-Copy
-Edit
+2. **Create a virtual environment (recommended)**
 python -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-Install dependencies
+source venv/bin/activate   # Linux/macOS
+venv\Scripts\activate      # Windows
 
-bash
-Copy
-Edit
+3. **Install dependencies**
 pip install -r requirements.txt
-Run the Flask app
 
-bash
-Copy
-Edit
+4. **Run the Flask app**
 python app.py
-Open your browser and go to
 
-cpp
-Copy
-Edit
+5. **Open your browser and go to**
 http://127.0.0.1:5000/
-Usage
-Type your query in the search box or use the 🎤 voice input button to speak your query.
+---
 
-Click suggested tags or questions for quick searches.
+## Usage
+-Type your query in the search box or use the 🎤 voice input button to speak your query.
 
-Toggle between dark and light mode using the 🌙 button.
+-Click suggested tags or questions for quick searches.
 
-View highlighted keywords and relevance scores in results.
+-Toggle between dark and light mode using the 🌙 button.
 
-API
-GET /api/search?q=your_query
+-View highlighted keywords and relevance scores in results.
+
+---
+
+## API
+-GET /api/search?q=your_query
 
 Returns JSON array of search results with highlights and relevance scores.
+---
 
-Project Structure
-cpp
-Copy
-Edit
+## Project Structure
 GeminiLite/
 ├── app.py
 ├── vector_engine.py
@@ -89,35 +80,21 @@ GeminiLite/
 │   └── (CSS and JS files if any)
 ├── requirements.txt
 └── README.md
-Screenshots
+---
+
+## Screenshots 
+
+-UI
+![image](https://github.com/user-attachments/assets/6a632f84-f7ee-40cb-94e1-24bb5ddfe27a)
+
+-Voice search ui
+![Screenshot 2025-06-04 201538](https://github.com/user-attachments/assets/3c64a571-f6dc-4355-b297-d42eb5ff675c)
+
+-Search output
+![image](https://github.com/user-attachments/assets/de1572b9-5973-4602-b9d0-4334e0611f92)
+ ---
 
 
-
-Future Improvements
-Integrate deep learning models like transformers for semantic understanding.
-
-Add support for more natural language queries.
-
-Improve voice recognition with multi-language capabilities.
-
-Add user authentication and personalized search history.
-
-Contact
-Created by [Your Name]
-GitHub: https://github.com/yourusername
-Email: your.email@example.com
-
-License
+ ## License
 This project is licensed under the MIT License.
 
-yaml
-Copy
-Edit
-
----
-
-### [Download the complete README.md file here](sandbox:/mnt/data/README.md)
-
----
-
-If you want, I can also help you draft a professional GitHub repo description or help with any other part! Just ask.
